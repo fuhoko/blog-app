@@ -1,23 +1,40 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import DefaultLayout from "@/components/layouts/Default/index.vue"
+import HomePage from "@/views/Home/index.vue"
+import CreateBlog from "@/views/CreateBlog/index.vue"
+import BlogDetail from "@/views/BlogDetail/index.vue"
+import EditBlog from "@/views/EditBlog/index.vue"
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home,
-  },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+    name: "Default",
+    component: DefaultLayout,
+    children: [
+      {
+        name: "Home",
+        path: "",
+        component: HomePage
+      },
+      {
+        name: "CreateBlog",
+        path: "/create-blog",
+        component: CreateBlog
+      },
+      {
+        name: "BlogDetail",
+        path: "/blog/:id",
+        component: BlogDetail
+      },
+      {
+        name: "EditBlog",
+        path: "/edit-blog/:id",
+        component: EditBlog
+      }
+    ]
   },
 ];
 
